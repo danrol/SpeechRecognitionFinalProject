@@ -3,11 +3,6 @@ function ZCR( frames, f_d, fs, data)
 % voice/unvoiced
 % signal. or in other words finds Frame ZCR
 
-% e.g. of ZCR
-% x = [1 2 -3 4 5 -6 2 -6 2];
-x = frames(110, :);
-
-
 %% finding ZCR of all frames
 [r, c] = size(frames);
 
@@ -53,6 +48,7 @@ fr_ws = frames(id,:); % frames without silence
 
 % reconstruct signal
 data_r = reshape(fr_ws',1,[]);
+sound(data_r, fs);
 figure;
 plot(data);hold on;
 plot(data_r,'g'); title('speech without silence');
