@@ -1,0 +1,6 @@
+function [voiced_id, unvoiced_id] = find_voiced_unvoiced( frames, 
+ZCR_values_per_frame, f_energy_vector , ZCR_threshold, f_energy_vector_threshold)
+
+voiced = 
+for i = 1 : length(frames)
+    if ((f_energy_vector(i) > f_energy_vector_threshold) && (ZCR_values_per_frame(i) < f_energy_vector_threshold))
