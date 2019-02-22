@@ -12,7 +12,7 @@ Ts = 10;                % analysis frame shift (ms)
 Nw = round( 1E-3*Tw*fs );    % frame duration (samples)
 Ns = round( 1E-3*Ts*fs );    % frame shift (samples)
 
-[frames, indexes] = vec2frames( data, Nw, Ns, 'cols', @hamming, false); 
+[frames, indexes] = vec2frames( data, Nw, Ns, 'rows', @hamming, false); 
 
-counter = ZCR(frames);
+ZCR(frames, Tw/1000, fs, data);
 
