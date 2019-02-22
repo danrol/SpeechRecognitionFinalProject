@@ -1,0 +1,11 @@
+function energyVec = STECalc(frames)
+
+
+% calculate frames energy
+[r,c] = size(frames);
+ste = 0;
+for i = 1 : r
+    ste(i) = sum(frames(i,:).^2);    
+end
+
+
