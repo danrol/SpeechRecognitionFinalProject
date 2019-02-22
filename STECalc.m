@@ -5,8 +5,8 @@ function ste = STECalc(frames)
 [r,c] = size(frames);
 ste = 0;
 %ste=zeros();
-for i = 1 : c
-    ste(i) = sum(frames(:,i).^2);    
+for i = 1 : r
+    ste(i) = sum(frames(i,:).^2);    
 end
 
 ste = ste/max(ste); %normalize the data
