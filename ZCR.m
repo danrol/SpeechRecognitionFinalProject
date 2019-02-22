@@ -1,4 +1,4 @@
-function ZCR( frames, f_d, fs, data)
+function  ZCRr1 = ZCR( frames, f_d, fs, data)
 % This file calculates short time Zero Crossing Rate (ZCR) of
 % voice/unvoiced
 % signal. or in other words finds Frame ZCR

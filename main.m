@@ -16,5 +16,5 @@ f_d = 0.025
 
 %[frames, ~] = vec2frames( data, Nw, Ns, 'rows', @hamming, false); 
 frames = framing(data, fs, f_d);
-ZCR(frames, f_d, fs, data);
+ZCRCounter = ZCR(frames, f_d, fs, data);
 
