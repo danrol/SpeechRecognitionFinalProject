@@ -1,16 +1,6 @@
+function [ ZCRCounter] = ZCR( frames)
 % This file calculates short time Zero Crossing Rate (ZCR) of voice/ausio
 % signal. or in other words finds Frame ZCR
- 
-close all; clear all;
-
-% read sound 
-[data, fs] = audioread('shee.wav');
-% normalize data
-data = data / abs(max(data));
-
-% do framing
-f_d = 0.025;
-frames = framing(data, fs, f_d);
 
 % e.g. of ZCR
 % x = [1 2 -3 4 5 -6 2 -6 2];
