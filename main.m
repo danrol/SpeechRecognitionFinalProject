@@ -2,7 +2,7 @@
 close all; clear all;
 
 % read sound 
-[data, fs] = audioread('shee.wav');
+[data, fs] = audioread('shee_mono.wav');
 % normalize data
 data = data / abs(max(data));
 
@@ -15,6 +15,6 @@ Ns = round( 1E-3*Ts*fs );    % frame shift (samples)
 f_d = 0.025
 
 %[frames, ~] = vec2frames( data, Nw, Ns, 'rows', @hamming, false); 
-frames = primitive_framing(data, fs);
+frames = framing(data, fs);
 ZCR(frames, f_d, fs, data);
 

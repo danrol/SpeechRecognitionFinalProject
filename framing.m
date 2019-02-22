@@ -1,4 +1,4 @@
-function [frames] = primitive_framing(data, fs)
+function frames = framing(data, fs)
 
 % do framing
 f_d = 0.025;
