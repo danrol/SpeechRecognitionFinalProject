@@ -16,4 +16,5 @@ f_energy_vector =  STECalc(frames);
 ste_threshold = 0.01;
 zcr_threshold = 0.2;
 
-voiced_unvoiced_per_frame = find_voiced_unvoiced(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold);
+voiced_id = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold);
+
