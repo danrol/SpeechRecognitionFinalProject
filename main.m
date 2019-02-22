@@ -15,6 +15,6 @@ Ns = round( 1E-3*Ts*fs );    % frame shift (samples)
 f_d = 0.025
 
 %[frames, ~] = vec2frames( data, Nw, Ns, 'rows', @hamming, false); 
-frames = framing(data, fs);
+frames = framing(data, fs, f_d);
 ZCR(frames, f_d, fs, data);
 

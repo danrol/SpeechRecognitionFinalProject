@@ -1,7 +1,6 @@
-function frames = framing(data, fs)
+function frames = framing(data, fs, f_d)
 
 % do framing
-f_d = 0.025;
 f_size = round(f_d * fs);
 n = length(data);
 n_f = floor(n/f_size);  %no. of frames
