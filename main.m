@@ -19,7 +19,22 @@ zcr_threshold = 0.2;
 voiced_id = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold);
 
 unvoiced_id = reshape(1:size(frames), 1, []); %create vector filled with numbers 1...96 in order
-unvoiced_id = setdiff(unvoiced_id, voiced_id); %change vector to be everything that is in unvoiced but not in voiced
+unvoiced_id = setdiff(unvoiced_id, voiced_id); %change vector to be every frame that is unvoiced
 
-%plot(data(voiced_id), 'g', data(~voiced_id), 'b'); 
+%plot(data(frames(voiced_id)), 'g', data(frames(unvoiced_id), 'b');
+fr_unvoiced = frames(unvoiced_id,:); 
+data_unvoiced = reshape(fr_unvoiced',1,[]);
+
+fr_voiced = frames(voiced_id,:); 
+data_voiced = reshape(fr_voiced',1,[]);
+
+figure
+plot(data); hold on;
+%plot(data_unvoiced, 'b'); 
+plot(data_voiced, 'g');
+%sound(data_voiced, fs);
+title ("Blue - original data, green - voiced areas after unvoiced deleted");
+[ voiced_timing, unvoiced_timing ] = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames);
+
+
 

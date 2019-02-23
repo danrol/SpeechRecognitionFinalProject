@@ -33,22 +33,3 @@ for j = 1 : length(ZCRr1)
     l = length(zcr_wave);
     zcr_wave(l : l + f_size) = ZCRr1(j);
 end
-% plot the ZCR with Signal
-%t = [0 : 1/fs : length(data)/fs]; % time in sec
-%t = t(1:end - 1);
-%t1 = [0 : 1/fs : length(zcr_wave)/fs];
-%t1 = t1(1:end - 1);
-
-%plot(t,data'); hold on;
-%plot(t1,zcr_wave,'r','LineWidth',2);
-
-% Silence Removal
-%id = find(ZCRr1 <= 0.2);
-%fr_ws = frames(id,:); % frames without silence
-
-% reconstruct signal
-%data_r = reshape(fr_ws',1,[]);
-%sound(data_r, fs);
-%figure;
-%plot(data);hold on;
-%plot(data_r,'g'); title('speech without silence');
