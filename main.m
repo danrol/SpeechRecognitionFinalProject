@@ -18,3 +18,8 @@ zcr_threshold = 0.2;
 
 voiced_id = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold);
 
+unvoiced_id = reshape(1:size(frames), 1, []); %create vector filled with numbers 1...96 in order
+unvoiced_id = setdiff(unvoiced_id, voiced_id); %change vector to be everything that is in unvoiced but not in voiced
+
+%plot(data(voiced_id), 'g', data(~voiced_id), 'b'); 
+
