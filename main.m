@@ -33,18 +33,24 @@ data_voiced = reshape(fr_voiced',1,[]);
 %plot(data); hold on;
 %plot(data_unvoiced, 'b'); 
 %plot(data_voiced, 'g');
-%sound(data_voiced, fs);
+sound(data_voiced, fs);
 %title ("Blue - original data, green - voiced areas after unvoiced deleted");
 [ voiced_timing, unvoiced_timing ] = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames);
 
 
-subplot(2,1,1)
-plot(data)
-title('Original Audio Data')
+tv = (0:numel(data)-1)/fs;
 
-subplot(2,1,2)
-plot(data_voiced, 'g')
-title('Only voiced part')
+tv_voice = tv(voiced_id); 
+
+plot(tv,data, 'b'); hold on;
+plot(tv_voice, data_voiced, 'g');
+%subplot(2,1,1)
+%plot(data)
+%title('Original Audio Data')
+
+%subplot(2,1,2)
+%plot(data_voiced, 'g')
+%title('Only voiced part')
 
 
 
