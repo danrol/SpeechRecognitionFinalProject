@@ -1,12 +1,12 @@
 close all; clear all;
 % read sound 
-[data, fs] = audioread('SheHas_me.wav');
+[data, fs] = audioread('MySonIsLost.wav');
 % normalize data
 data = data / abs(max(data));
 %frame duration
 f_d = 0.010; 
 %min energy
-ste_threshold = 0.02;
+ste_threshold = 0.01;
 %max zero-crossing rate
 zcr_threshold = 0.2;
 
