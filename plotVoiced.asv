@@ -1,0 +1,30 @@
+function [voiced_data,unvoiced_data]=plotVoiced(voiced_frames,data,frames)
+ [num_frames,frame_size] = size(frames);
+voiced_data = data;
+unvoiced_data = data;
+
+
+for i=1:num_frames
+    if (voiced_frames(i,2) == 1)
+        voiced_data(i:(i+frame_size)) = NaN;
+        for t=1:frame_size
+            
+        end
+    else
+        unvoiced_data(i:(i+frame_size)) = NaN;
+    end
+end
+plot(voiced_data,'g');hold on;plot(unvoiced_data,'b')
+
+%plot(voiced_data,'r',unvoiced_data,'g');
+% s = size(data,1);
+% voiced_data(1:s,1) = 0;
+% for i=1:num_frames
+% if voiced_frames(i,2) == 1
+%     voiced_data(num_frames:(num_frames+frame_size)) = NaN;
+% end
+% end
+
+%plot(data,'g');hold on;plot(voiced_frames(:,2),'b');
+
+

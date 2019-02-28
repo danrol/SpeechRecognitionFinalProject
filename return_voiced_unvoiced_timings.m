@@ -1,24 +1,21 @@
-function [ voiced_timing, unvoiced_timing ] = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames)
+function voiced_frame = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames)
+% returns a table col 1 is frame, col 2 indicates voices/unvoices
+% 1 - voiced, 0 - unvoiced
+
 
 [r_voiced, c] = size(voiced_id);
-voiced_timing = zeros(r_voiced, 2);
-
 [r_unvoiced, c] = size(unvoiced_id);
-unvoiced_timing = zeros(r_unvoiced, 2);
-
+voiced_frame = zeros(r_voiced + r_unvoiced, 2);
 [r, c] = size(frames);
 
-unvoiced_index = 1;
-voiced_index = 1;
+
 for i=1:r
     if ismember(i, unvoiced_id)
-        unvoiced_timing(unvoiced_index, 1) = f_d * i;
-        unvoiced_timing(unvoiced_index, 2) = f_d * i +f_d;
-        unvoiced_index = unvoiced_index +1;
+        voiced_frame(i, 1) = f_d * i;
+        voiced_frame(i, 2) = 0;
     else
-        voiced_timing(voiced_index, 1) = f_d * i;
-        voiced_timing(voiced_index, 2) = f_d * i +f_d;
-        voiced_index = voiced_index + 1;
+        voiced_frame(i, 1) = f_d * i;
+        voiced_frame(i, 2) = 1;
     end 
 end
         

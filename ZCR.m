@@ -14,10 +14,10 @@ for i = 1 : r
     %% Method 1
     for k = 1:length(x) - 1
     
-        if ((x(k) < 0) && (x(k + 1) > 0 ))
+        if ((x(k) <= 0) && (x(k + 1) > 0 ))
             ZCRf1(i) = ZCRf1(i) + 1;
    
-        elseif ((x(k) > 0) && (x(k + 1) < 0))
+        elseif ((x(k) >= 0) && (x(k + 1) < 0))
             ZCRf1(i) = ZCRf1(i) + 1;
         end
     end   
