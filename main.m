@@ -1,10 +1,10 @@
 close all; clear all;
 % read sound 
 %[data, fs] = audioread('bad.wav');
-%
-[data, fs] = audioread('bed.wav');
+%[data, fs] = audioread('bed.wav');
 %[data, fs] = audioread('ComeHere.wav');
-%[data, fs] = audioread('FollowMe.wav');
+%
+[data, fs] = audioread('FollowMe.wav');
 %[data, fs] = audioread('IamDeseparate.wav');
 %[data, fs] = audioread('ImTooOldForThis.wav');
 %[data, fs] = audioread('MyNameIsBojan.wav');
@@ -20,7 +20,7 @@ f_d = 0.01; % Seconds
 %min energy
 ste_threshold = 0;
 %max zero-crossing rate
-zcr_threshold = 0.08;
+zcr_threshold = 0.4;
 
 frames = framing(data, fs, f_d);
 % get ZCR per frame
