@@ -6,33 +6,35 @@ data = data / abs(max(data));
 %frame duration
 f_d = 0.010; 
 %min energy
-ste_threshold = 0.01;
+ste_threshold = 0.005;
 %max zero-crossing rate
-zcr_threshold = 0.2;
+zcr_threshold = 0.6;
 
 frames = framing(data, fs, f_d);
 
+% get ZCR per frame
 ZCR_values_per_frame = ZCR(frames, f_d, fs, data);
+
+% get energy per frame
 f_energy_vector =  STECalc(frames);
 
+%zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
+
 %% determines which frames contains voice
-voiced_id = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold);
+[voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
 
 %% separate voiced/unvoiced data
-unvoiced_id = reshape(1:size(frames), 1, []); %create vector filled with numbers 
-unvoiced_id = setdiff(unvoiced_id, voiced_id); %change vector to be every frame that is unvoiced
+[data_voiced, data_unvoiced] = getVoicedData(frames, voiced_id, unvoiced_id);
 
-fr_voiced = frames(voiced_id,:); 
-fr_unvoiced = frames(unvoiced_id,:); 
+% returns table of frames and if they are voiced or not
+voiced_frames = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames);
+% plot
+plotVoiced(voiced_frames,data,frames);
 
-data_voiced = reshape(fr_voiced',1,[]);
-data_unvoiced = reshape(fr_unvoiced',1,[]);
-
+% sound the data :
+%% data_voiced | data_unvoiced | data
 sound(data_voiced, fs);
 
-voiced_frames = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames);
-
-plotVoiced(voiced_frames,data,frames);
 
 
 
