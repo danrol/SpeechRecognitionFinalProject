@@ -1,7 +1,8 @@
 close all; clear all;
 % read sound 
 %[data, fs] = audioread('bad.wav');
-%[data, fs] = audioread('bed.wav');
+%
+[data, fs] = audioread('bed.wav');
 %[data, fs] = audioread('ComeHere.wav');
 %[data, fs] = audioread('FollowMe.wav');
 %[data, fs] = audioread('IamDeseparate.wav');
@@ -10,23 +11,18 @@ close all; clear all;
 %[data, fs] = audioread('MySonIsLost.wav');
 %[data, fs] = audioread('OhMySon.wav');
 %[data, fs] = audioread('shee_mono.wav');
-%
-[data, fs] = audioread('SheHas_me.wav');
+%[data, fs] = audioread('SheHas_me.wav');
 %[data, fs] = audioread('ThankYouFollowSeagull.wav');
 % normalize data
 data = data / abs(max(data));
-
-
 %frame duration
-f_d = 0.01; 
+f_d = 0.01; % Seconds
 %min energy
-ste_threshold = 0.00000001;
+ste_threshold = 0;
 %max zero-crossing rate
-zcr_threshold = 0.3;
+zcr_threshold = 0.08;
 
-% old man - ste: 0.001, zcr - 0.35
 frames = framing(data, fs, f_d);
-
 % get ZCR per frame
 ZCR_values_per_frame = ZCR(frames);
 % get energy per frame

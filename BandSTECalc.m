@@ -11,6 +11,7 @@ r = size(frames,1);
 bandSTE = zeros(r, 3);
 for i = 1:r
     frame_fft = fft(frames(i,:),TH3); % do fft for each frame
+    frame_fft = abs(frame_fft);
     LB = frame_fft(1,1:TH1);
     MB = frame_fft(1,TH1:TH2);
     HB = frame_fft(1,TH2:TH3);
