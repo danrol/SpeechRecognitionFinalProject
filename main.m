@@ -18,11 +18,11 @@ data = data / abs(max(data));
 
 
 %frame duration
-f_d = 0.005; 
+f_d = 0.01; 
 %min energy
-ste_threshold = 0.001;
+ste_threshold = 0.00000001;
 %max zero-crossing rate
-zcr_threshold = 0.35;
+zcr_threshold = 0.3;
 
 % old man - ste: 0.001, zcr - 0.35
 frames = framing(data, fs, f_d);
@@ -33,8 +33,8 @@ ZCR_values_per_frame = ZCR(frames);
 f_energy_vector = STECalc(frames);
 f_energy_bands = BandSTECalc(frames);
 
-ste_threshold = mean(ste_threshold);
-zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
+%ste_threshold = mean(ste_threshold);
+%zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
 
 %% determines which frames contains voice
 
@@ -42,6 +42,7 @@ zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
 %[voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
 
 % method 2
+[voiced_id,unvoiced_id] = find_voiced_id_with_bands(ZCR_values_per_frame, f_energy_bands, zcr_threshold,ste_threshold, frames);
 
 
 %% separate voiced/unvoiced data
@@ -55,8 +56,6 @@ plotVoiced(voiced_frames,data,frames);
 % sound the data :
 %% data_voiced | data_unvoiced | data
 sound(data_voiced, fs);
-
-ff = fft(data,4000);
 
 
 
