@@ -50,7 +50,8 @@ plotVoiced(voiced_frames,data,frames);
 %% data_voiced | data_unvoiced | data
 sound(data_unvoiced, fs);
 
-
+[x, fs] = audioread('shee_mono.wav');
+[F0, T, C] = spPitchTrackCepstrum(x, fs, 30, 20, 'hamming', 'plot');
 
 
 
