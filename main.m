@@ -1,24 +1,39 @@
 close all; clear all;
 % read sound 
-[data, fs] = audioread('MySonIsLost.wav');
+%[data, fs] = audioread('bad.wav');
+%[data, fs] = audioread('bed.wav');
+%[data, fs] = audioread('ComeHere.wav');
+%
+[data, fs] = audioread('FollowMe.wav');
+%[data, fs] = audioread('IamDeseparate.wav');
+%[data, fs] = audioread('ImTooOldForThis.wav');
+%[data, fs] = audioread('MyNameIsBojan.wav');
+%[data, fs] = audioread('MySonIsLost.wav');
+%[data, fs] = audioread('OhMySon.wav');
+%[data, fs] = audioread('shee_mono.wav');
+%[data, fs] = audioread('SheHas_me.wav');
+%[data, fs] = audioread('ThankYouFollowSeagull.wav');
 % normalize data
 data = data / abs(max(data));
-%frame duration
-f_d = 0.010; 
-%min energy
-ste_threshold = 0.005;
-%max zero-crossing rate
-zcr_threshold = 0.6;
 
+
+%frame duration
+f_d = 0.005; 
+%min energy
+ste_threshold = 0.001;
+%max zero-crossing rate
+zcr_threshold = 0.35;
+
+% old man - ste: 0.001, zcr - 0.35
 frames = framing(data, fs, f_d);
 
 % get ZCR per frame
-ZCR_values_per_frame = ZCR(frames, f_d, fs, data);
-
+ZCR_values_per_frame = ZCR(frames);
 % get energy per frame
 f_energy_vector =  STECalc(frames);
 
-%zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
+ste_threshold = mean(ste_threshold);
+zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
 
 %% determines which frames contains voice
 [voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
@@ -33,7 +48,7 @@ plotVoiced(voiced_frames,data,frames);
 
 % sound the data :
 %% data_voiced | data_unvoiced | data
-sound(data_voiced, fs);
+sound(data_unvoiced, fs);
 
 
 
