@@ -2,25 +2,28 @@ close all; clear all;
 % read sound 
 %[data, fs] = audioread('bad.wav');
 %[data, fs] = audioread('bed.wav');
-%[data, fs] = audioread('ComeHere.wav');
-%
-[data, fs] = audioread('FollowMe.wav');
-%[data, fs] = audioread('IamDeseparate.wav');
+%[data, fs] = audioread('come_here_usual.wav');
 %[data, fs] = audioread('ImTooOldForThis.wav');
-%[data, fs] = audioread('MyNameIsBojan.wav');
-%[data, fs] = audioread('MySonIsLost.wav');
+%[data, fs] = audioread('MyNameIsBojan.wav'); %long recording - takes a few
+%mins
+[data, fs] = audioread('SheHad.wav');
 %[data, fs] = audioread('OhMySon.wav');
 %[data, fs] = audioread('shee_mono.wav');
 %[data, fs] = audioread('SheHas_me.wav');
-%[data, fs] = audioread('ThankYouFollowSeagull.wav');
+
+
+%frame duration
+f_d = 0.02; % Seconds
+
 % normalize data
 data = data / abs(max(data));
+
 %frame duration
 f_d = 0.01; % Seconds
 %min energy
-ste_threshold = 0;
+ste_threshold = 0.005;
 %max zero-crossing rate
-zcr_threshold = 0.4;
+zcr_threshold = 0.2;
 
 frames = framing(data, fs, f_d);
 % get ZCR per frame
@@ -30,15 +33,15 @@ f_energy_vector = STECalc(frames);
 f_energy_bands = BandSTECalc(frames);
 
 %ste_threshold = mean(ste_threshold);
-%zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
+zcr_threshold = mean(ZCR_values_per_frame); %take average ZCR as threshold
 
 %% determines which frames contains voice
 
 % method 1
-%[voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
+[voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
 
 % method 2
-[voiced_id,unvoiced_id] = find_voiced_id_with_bands(ZCR_values_per_frame, f_energy_bands, zcr_threshold,ste_threshold, frames);
+%[voiced_id,unvoiced_id] = find_voiced_id_with_bands(ZCR_values_per_frame, f_energy_bands, zcr_threshold,ste_threshold, frames);
 
 
 %% separate voiced/unvoiced data
@@ -52,6 +55,5 @@ plotVoiced(voiced_frames,data,frames);
 % sound the data :
 %% data_voiced | data_unvoiced | data
 sound(data_voiced, fs);
-
 
 
