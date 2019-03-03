@@ -1,27 +1,33 @@
 close all; clear all;
+%% Voiced/Unvoiced Detection
+% Eden Dupont
+% Daniil Rolnik
+% Eden Sharoni
+%%
 % read sound
+% Choose a recording:
+%
+[data, fs] = audioread('shee_mono.wav');
 %[data, fs] = audioread('bad.wav');
 %[data, fs] = audioread('bed.wav');
 %[data, fs] = audioread('come_here_usual.wav');
 %[data, fs] = audioread('ImTooOldForThis.wav');
 %[data, fs] = audioread('MyNameIsBojan.wav'); %long recording - takes a few
 %mins
-%
 %[data, fs] = audioread('SheHad.wav');
 %[data, fs] = audioread('OhMySon.wav');
-[data, fs] = audioread('shee_mono.wav');
 %[data, fs] = audioread('SheHas_me.wav');
 
 % normalize data
 data = data / abs(max(data));
-
+%% Settings
 %frame duration
 f_d = 0.01; % Seconds
 %min energy
 ste_threshold = 0.05;
 %max zero-crossing rate
 zcr_threshold = 0.3;
-
+%%
 frames = framing(data, fs, f_d);
 % get ZCR per frame
 ZCR_values_per_frame = ZCR(frames);
@@ -65,6 +71,10 @@ plotVoiced(voiced_unvoiced_frames,data,frames);
 
 % sound the data :
 %% data_voiced | data_unvoiced | data
-sound(data_voiced, fs);
+% Choose which data to sound
+%
+sound(data_voiced, fs); % sounds the data after removing unvoiced
+% sound(data_unvoiced, fs); % sounds the unvoiced data
+% sound(data, fs); % sounds the data as is
 
 

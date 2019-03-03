@@ -29,21 +29,21 @@ for i=1:size(frames,1)
         continue;
     elseif(EM > EL && EL > EH) % not sure
         if(ZCR_values_per_frame(1,i) > zcr_threshold) % voiced
-             num = num + 1;
-             voiced_id(num) = i;
+            num = num + 1;
+            voiced_id(num) = i;
         end
     elseif(EL > EH && EH > EM) % not sure
         if(ZCR_values_per_frame(1,i) > zcr_threshold ) % voiced
-             num = num + 1;
-             voiced_id(num) = i;
+            num = num + 1;
+            voiced_id(num) = i;
         end
     else
         if(ZCR_values_per_frame(1,i) > zcr_threshold ) % voiced
-             num = num + 1;
-             voiced_id(num) = i;
+            num = num + 1;
+            voiced_id(num) = i;
         end
     end
 end
 
-unvoiced_id = reshape(1:size(frames), 1, []); %create vector filled with numbers 
+unvoiced_id = reshape(1:size(frames), 1, []); %create vector filled with numbers
 unvoiced_id = setdiff(unvoiced_id, voiced_id); %change vector to be every frame that is unvoiced

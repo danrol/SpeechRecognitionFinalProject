@@ -16,7 +16,7 @@ for i=1:r
     else
         voiced_frame(i, 1) = f_d * i;
         voiced_frame(i, 2) = 1;
-    end 
+    end
 end
-        
+
 

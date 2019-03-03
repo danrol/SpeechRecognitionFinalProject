@@ -8,6 +8,6 @@ temp = 0;
 frames = zeros(1, f_size);
 for i = 1 : n_f
     
-   frames(i,:) = data(temp + 1 : temp + f_size);
-   temp = temp + f_size;
+    frames(i,:) = data(temp + 1 : temp + f_size);
+    temp = temp + f_size;
 end
