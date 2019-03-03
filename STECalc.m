@@ -1,6 +1,5 @@
 function ste = STECalc(frames)
 
-
 % calculate frames energy
 [r,c] = size(frames);
 ste = zeros(1, r);

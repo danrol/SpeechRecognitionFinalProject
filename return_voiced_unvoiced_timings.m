@@ -1,5 +1,5 @@
 function voiced_frame = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames)
-% returns a table col 1 is frame, col 2 indicates voices/unvoices
+% returns a table col 1 is frame by time, col 2 indicates voices/unvoices
 % 1 - voiced, 0 - unvoiced
 
 

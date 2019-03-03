@@ -1,5 +1,5 @@
 close all; clear all;
-% read sound 
+% read sound
 %[data, fs] = audioread('bad.wav');
 %[data, fs] = audioread('bed.wav');
 %[data, fs] = audioread('come_here_usual.wav');
@@ -7,9 +7,9 @@ close all; clear all;
 %[data, fs] = audioread('MyNameIsBojan.wav'); %long recording - takes a few
 %mins
 %
-[data, fs] = audioread('SheHad.wav');
+%[data, fs] = audioread('SheHad.wav');
 %[data, fs] = audioread('OhMySon.wav');
-%[data, fs] = audioread('shee_mono.wav');
+[data, fs] = audioread('shee_mono.wav');
 %[data, fs] = audioread('SheHas_me.wav');
 
 % normalize data
@@ -57,10 +57,11 @@ f_energy_bands = BandSTECalc(frames);
 %% separate voiced/unvoiced data
 [data_voiced, data_unvoiced] = getVoicedData(frames, voiced_id, unvoiced_id);
 
-% returns table of frames and if they are voiced or not
-voiced_frames = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames);
+% returns table of frames and if they are voiced or not (0 - unvoiced, 1 -
+% voiced)
+voiced_unvoiced_frames = return_voiced_unvoiced_timings(voiced_id, unvoiced_id, f_d, frames);
 % plot
-plotVoiced(voiced_frames,data,frames);
+plotVoiced(voiced_unvoiced_frames,data,frames);
 
 % sound the data :
 %% data_voiced | data_unvoiced | data
