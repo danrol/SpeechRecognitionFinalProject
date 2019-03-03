@@ -20,7 +20,7 @@ f_d = 0.01; % Seconds
 %min energy
 ste_threshold = 0.05;
 %max zero-crossing rate
-zcr_threshold = 0.2;
+zcr_threshold = 0.3;
 
 frames = framing(data, fs, f_d);
 % get ZCR per frame
@@ -31,12 +31,27 @@ f_energy_bands = BandSTECalc(frames);
 
 %% determines which frames contains voice
 
-% method 1
-%[voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
+%% Method 1
+% based on article
+% Separation of Voiced and Unvoiced using Zero crossing rate and Energy of the Speech Signal  Bachu R.G., Kopparthi S., Adapa B., Barkana B.D.
+% https://www.researchgate.net/publication/259828967_Separation_of_Voiced_and_Unvoiced_Speech_Signals_using_Energy_and_Zero_Crossing_Rate
 
-% method 2
+
+[voiced_id,unvoiced_id] = find_voiced_id(ZCR_values_per_frame, f_energy_vector, zcr_threshold, ste_threshold, frames);
+
+%% Method 2
+% Based on article :
+% A Method for Voiced/Unvoiced Classification of Noisy
+% Speech by Analyzing Time-Domain Features of
+% Spectrogram Image
+% ISSN: 2326-9065 (Print); ISSN: 2326-9073 (Online)
+% by Kazi Mahmudul Hassan, Ekramul Hamid, Khademul Islam Molla2
+% https://pdfs.semanticscholar.org/86df/1a9f7beffc9e450af9e2b179c9c55174d007.pdf
 %
-[voiced_id,unvoiced_id] = find_voiced_id_with_bands(ZCR_values_per_frame, f_energy_bands, zcr_threshold,ste_threshold, frames);
+% change zcr threshold
+% method 1 works better
+
+%[voiced_id,unvoiced_id] = find_voiced_id_with_bands(ZCR_values_per_frame, f_energy_bands, zcr_threshold,ste_threshold, frames);
 
 
 %% separate voiced/unvoiced data
