@@ -28,17 +28,17 @@ for i=1:size(frames,1)
     elseif(EM > EH && EH > EL) % unvoiced
         continue;
     elseif(EM > EL && EL > EH) % not sure
-        if(ZCR_values_per_frame(1,i) < zcr_threshold) % voiced
+        if(ZCR_values_per_frame(1,i) > zcr_threshold) % voiced
              num = num + 1;
              voiced_id(num) = i;
         end
     elseif(EL > EH && EH > EM) % not sure
-        if(ZCR_values_per_frame(1,i) < zcr_threshold ) % voiced
+        if(ZCR_values_per_frame(1,i) > zcr_threshold ) % voiced
              num = num + 1;
              voiced_id(num) = i;
         end
     else
-        if(ZCR_values_per_frame(1,i) < zcr_threshold ) % voiced
+        if(ZCR_values_per_frame(1,i) > zcr_threshold ) % voiced
              num = num + 1;
              voiced_id(num) = i;
         end
